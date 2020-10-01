@@ -26,7 +26,7 @@ client = vt.Client(vtApi)
 
 result = open(outputfile, "x")
 lineList = [line.rstrip('\n') for line in open(filename)]
-listLenght = lineList.len
+listLenght = lineList.len()
 doneCount = 0
 
 unknownHashes = 0
