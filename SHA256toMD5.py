@@ -23,17 +23,24 @@ outputfile = sys.argv[2]
 vtApi = sys.argv[3]
 client = vt.Client(vtApi)
 
+
 result = open(outputfile, "x")
 lineList = [line.rstrip('\n') for line in open(filename)]
+listLenght = lineList.len
+doneCount = 0
+
 unknownHashes = 0
 unknownHashesList =[]
 
 for sha256 in lineList:
     try:
-        md5 = client.get_object("/files/" + sha256.md5)
+        md5 = client.get_object("/files/" + sha256).md5
+        doneCount = doneCount+1
+        print(doneCount, "/", listLenght, "done\n")
         result.write(md5)
         result.write("\n")
     except:
+        print("Unknown")
         unknownHashes = unknownHashes+1
         unknownHashesList.append(sha256)
     time.sleep(16)
